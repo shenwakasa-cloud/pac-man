@@ -339,9 +339,10 @@ clock = pygame.time.Clock()
 font = pygame.font.SysFont("arial", 18)
 bigfont = pygame.font.SysFont("arial", 36, bold=True)
 dot_eat = pygame.mixer.Sound("./dot_eat.mp3")
+dot_eat.set_volume(.2)
 
-pygame.mixer.music.load("./bg.mp3")
-pygame.mixer.music.set_volume(0.5)
+pygame.mixer.music.load("./ghosts_noises.wav")
+pygame.mixer.music.set_volume(0.2)
 pygame.mixer.music.play(-1)
 
 # create player and ghosts

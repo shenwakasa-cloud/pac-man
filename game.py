@@ -339,7 +339,7 @@ clock = pygame.time.Clock()
 font = pygame.font.SysFont("arial", 18)
 bigfont = pygame.font.SysFont("arial", 36, bold=True)
 main_bg = pygame.mixer.Sound("./bg.mp3")
-main_bg.set_volume(0.8)
+main_bg.set_volume(0.5)
 
 # create player and ghosts
 player = Player(player_start)

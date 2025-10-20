@@ -334,12 +334,15 @@ class Ghost:
 pygame.init()
 pygame.mixer.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Mini Classic Pac-Man")
+pygame.display.set_caption("Pac-Man")
 clock = pygame.time.Clock()
 font = pygame.font.SysFont("arial", 18)
 bigfont = pygame.font.SysFont("arial", 36, bold=True)
-main_bg = pygame.mixer.Sound("./bg.mp3")
-main_bg.set_volume(0.5)
+dot_eat = pygame.mixer.Sound("./dot_eat.mp3")
+
+pygame.mixer.music.load("./bg.mp3")
+pygame.mixer.music.set_volume(0.5)
+pygame.mixer.music.play(-1)
 
 # create player and ghosts
 player = Player(player_start)
@@ -374,7 +377,6 @@ def clamp_pos(pos):
 # main loop
 running = True
 while running:
-    main_bg.play()
     dt = clock.tick(FPS) / 1000.0
     for ev in pygame.event.get():
         if ev.type == pygame.QUIT:
@@ -420,6 +422,7 @@ while running:
         ptile = (int(player.tile[0]), int(player.tile[1]))
         if ptile in pellets_active:
             pellets_active.remove(ptile)
+            dot_eat.play()
             player.score += 10
         if ptile in power_active:
             power_active.remove(ptile)

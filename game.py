@@ -43,6 +43,7 @@ GHOST_COLORS = {
     "clyde": (255,184,82),
 }
 
+
 # map legend:
 # '#' = wall
 # '.' = pellet
@@ -52,7 +53,7 @@ GHOST_COLORS = {
 # 'B' = ghost box / block
 # '1','2','3','4' = ghost start positions (Blinky, Pinky, Inky, Clyde)
 MAP = [
-"############################",
+"############ ###############",
 "#............##............#",
 "#.####.#####.##.#####.####.#",
 "#o####.#####.##.#####.####o#",
@@ -71,7 +72,7 @@ MAP = [
 "     #.## ######## ##.#     ",
 "     #.##          ##.#     ",
 "     #.## ######## ##.#     ",
-"######.## ######## ##.######",
+"######.## #......# ##.######",
 "#............##............#",
 "#.####.#####.##.#####.####.#",
 "#.####.#####.##.#####.####.#",
@@ -80,9 +81,9 @@ MAP = [
 "###.##.##.########.##.##.###",
 "#......##....##....##......#",
 "#.##########.##.##########.#",
-"#.##########.##.##########.#",
+"#.#####   ##.##.##   #####.#",
 "#..........................#",
-"############################"
+"############ ###############"
 ]
 
 # Replace spaces in map row 10-18 due to arcade center spacing: we keep map width 28 per row
@@ -331,11 +332,14 @@ class Ghost:
 
 # --- Game init ---
 pygame.init()
+pygame.mixer.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Mini Classic Pac-Man")
 clock = pygame.time.Clock()
 font = pygame.font.SysFont("arial", 18)
 bigfont = pygame.font.SysFont("arial", 36, bold=True)
+main_bg = pygame.mixer.Sound("./bg.mp3")
+main_bg.set_volume(0.8)
 
 # create player and ghosts
 player = Player(player_start)
@@ -370,6 +374,7 @@ def clamp_pos(pos):
 # main loop
 running = True
 while running:
+    main_bg.play()
     dt = clock.tick(FPS) / 1000.0
     for ev in pygame.event.get():
         if ev.type == pygame.QUIT:
